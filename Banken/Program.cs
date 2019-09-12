@@ -8,14 +8,58 @@ namespace Banken
         static List<Customer> list = new List<Customer>();
         static void Main(string[] args)
         {
+            int choise = 0;
+            while (choise != 7)
+            {
+                choise = SelectMenuItem();
+                switch (choise)
+                {
+                    case 1:
+                        Console.WriteLine("Du valde att lägga in en ny användare");
+                        AddCustomer();
+                        break;
+                    case 2:
+                        Console.WriteLine("Du vill ta bort en användare");
+                        RemoveCustomer();
+                        break;
+                    case 3:
+                        Console.WriteLine("Du vill se alla befintliga användare");
+                        ShowCustomer();
+                        break;
+                    case 7:
+                        Console.WriteLine("Du valde att avsluta programmet");
+                        break;
+                }
+            }
             
+
+            
+
+            Console.ReadLine();
+        }
+
+        static void ShowCustomer()
+        {
             foreach (Customer i in list)
             {
                 Console.WriteLine("Namn: " + i.Name + " Balance: " + i.Balance);
             }
-
-            Console.ReadLine();
         }
+
+        static void RemoveCustomer()
+        {
+            int n = 1;
+            foreach (Customer i in list)
+            {
+                Console.WriteLine(n + " Namn: " + i.Name);
+                n += 1;
+            }
+            Console.WriteLine("Vilken använder vill du ta bort? ");
+            int remove = int.Parse(Console.ReadLine());
+            list.RemoveAt(remove - 1);
+
+        }
+
         static void AddCustomer()
         {
             Customer info1 = new Customer();
@@ -39,22 +83,6 @@ namespace Banken
 
             Console.WriteLine("Ange ditt val: ");
             int choise = int.Parse(Console.ReadLine());
-
-            switch (choise)
-            {
-                case 1:
-                    Console.WriteLine("Du valde att lägga in en ny användare");
-                    break;
-                case 2:
-                    Console.WriteLine("Du vill ta bort en användare");
-                    break;
-                case 3:
-                    Console.WriteLine("Du vill se alla befintliga användare");
-                    break;
-                case 7:
-                    Console.WriteLine("Du valde att avsluta programmet");
-                    break;
-            }
 
             return choise;
         }
