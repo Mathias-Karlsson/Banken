@@ -62,7 +62,7 @@ namespace Banken
 
         static void AddCustomer()
         {
-            Customer info1 = new Customer();
+            Customer info1 = new Customer(); //Objectet info1 skapas av klassen Customer med hjälp av konstruktorn
             info1.Name = Console.ReadLine();
             info1.Balance = int.Parse(Console.ReadLine());
             list.Add(info1);
