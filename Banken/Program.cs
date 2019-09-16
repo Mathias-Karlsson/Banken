@@ -1,13 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+
 
 namespace Banken
 {
     class Program
     {
         static List<Customer> list = new List<Customer>();
+
+        static void WriteFile(string Filename)
+        {
+            File.WriteAllText(Filename, "Hello Customers");
+        }
+
+        static void ReadFile(string Filename)
+        {
+            if (File.Exists(Filename))
+            {
+                Console.WriteLine(File.ReadAllText(Filename));
+            }
+            
+        }
+
         static void Main(string[] args)
         {
+            string Filename = @"C:\test\mybank.txt";
+
+            ReadFile(Filename);
             int choise = 0;
             while (choise != 7)
             {
@@ -28,6 +48,9 @@ namespace Banken
                         break;
                     case 7:
                         Console.WriteLine("Du valde att avsluta programmet");
+
+                        WriteFile(Filename);
+
                         break;
                 }
             }
