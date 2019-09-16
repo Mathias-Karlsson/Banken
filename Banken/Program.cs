@@ -9,25 +9,28 @@ namespace Banken
     {
         static List<Customer> list = new List<Customer>();
 
-        static void WriteFile(string Filename)
+        static void WriteFile(string filename)
         {
-            File.WriteAllText(Filename, "Hello Customers");
+            File.WriteAllText(filename, "Hello Customers");
         }
 
-        static void ReadFile(string Filename)
+        static void ReadFile(string filename)
         {
-            if (File.Exists(Filename))
+            if (File.Exists(filename))
             {
-                Console.WriteLine(File.ReadAllText(Filename));
+                Console.WriteLine(File.ReadAllText(filename));
             }
             
         }
-
+        /// <summary>
+        /// Huvud programmet som låter användaren välja olika alternativ
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
-            string Filename = @"C:\test\mybank.txt";
+            string filename = @"C:\test\mybank.txt";
 
-            ReadFile(Filename);
+            ReadFile(filename);
             int choise = 0;
             while (choise != 7)
             {
@@ -49,7 +52,7 @@ namespace Banken
                     case 7:
                         Console.WriteLine("Du valde att avsluta programmet");
 
-                        WriteFile(Filename);
+                        WriteFile(filename);
 
                         break;
                 }
