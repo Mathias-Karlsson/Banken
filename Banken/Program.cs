@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
+using System.Linq;
+using System.Text;
 
 
 namespace Banken
@@ -14,7 +17,7 @@ namespace Banken
             File.WriteAllText(filename, "Hello Customers");
         }
 
-        static void ReadFile(string filename)
+        static void ReadFile(string filepath, string filename)
         {
             if (File.Exists(filename))
             {
@@ -28,9 +31,10 @@ namespace Banken
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            string filename = @"C:\test\mybank.txt";
+            string filepath = @"C:\test\";
+            string filename = @"mybank.txt";
 
-            ReadFile(filename);
+            ReadFile(filepath, filename);
             int choise = 0;
             while (choise != 7)
             {
@@ -52,7 +56,7 @@ namespace Banken
                     case 7:
                         Console.WriteLine("Du valde att avsluta programmet");
 
-                        WriteFile(filename);
+                        WriteFile(filepath, filename);
 
                         break;
                 }
@@ -62,6 +66,20 @@ namespace Banken
             
 
             Console.ReadLine();
+        }
+
+        private static void WriteFile(string filepath, string filename)
+        {
+            string f = filepath + filename;
+            if (File.Exists(f))
+            {
+                File.Delete(f);
+            }
+
+            if (Directory.Exists(filepath) == false)
+            {
+                Directory.CreateDirectory(filepath);
+            }
         }
 
         static void ShowCustomer()
@@ -112,5 +130,6 @@ namespace Banken
 
             return choise;
         }
+
     }
 }
