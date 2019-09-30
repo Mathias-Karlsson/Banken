@@ -80,6 +80,12 @@ namespace Banken
             {
                 Directory.CreateDirectory(filepath);
             }
+
+            string appendText = "";
+            foreach (Customer item in list)
+            {
+                appendText += item.GetCustomerInfoString() + Environment.NewLine;
+            }
         }
 
         static void ShowCustomer()

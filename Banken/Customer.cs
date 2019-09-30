@@ -23,6 +23,10 @@ namespace Banken
 
         }
 
+        public string GetCustomerInfoString()
+        {
+            return Name + ',' + Balance;
+        }
 
         public string ShowCustomer { get { return "Namn: " + Name + " Balance: " + Balance + " kr"; } }
     }
