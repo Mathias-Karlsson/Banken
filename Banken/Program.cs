@@ -17,7 +17,7 @@ namespace Banken
             File.WriteAllText(filename, "Hello Customers");
         }
 
-        static void ReadFile(string filepath, string filename)
+        static void ReadFileOld(string filepath, string filename)
         {
             if (File.Exists(filename))
             {
@@ -53,11 +53,26 @@ namespace Banken
                         Console.WriteLine("Du vill se alla befintliga användare");
                         ShowCustomer();
                         break;
+                    case 4:
+                        Console.WriteLine("Du vill see en persons saldo");
+                        ShowBalance();
+                        break;
+                    case 5:
+                        Console.WriteLine("Du vill göra en insättning för en person");
+                        AddBalance();
+                        break;
+                    case 6:
+                        Console.WriteLine("Du vill ta ut pengar från en person");
+                        RemoveBalance();
+                        break;
                     case 7:
                         Console.WriteLine("Du valde att avsluta programmet");
 
                         WriteFile(filepath, filename);
 
+                        break;
+                    default:
+                        Console.WriteLine("Du gjorde ett felaktigt val");
                         break;
                 }
             }
@@ -85,6 +100,22 @@ namespace Banken
             foreach (Customer item in list)
             {
                 appendText += item.GetCustomerInfoString() + Environment.NewLine;
+            }
+            File.AppendAllText(f, appendText);
+        }
+
+        private static void ReadFile(string filepath, string filename)
+        {
+            string f = filepath + filename;
+            if (File.Exists(f))
+            {
+                string[] rows = File.ReadAllLines(f);
+                foreach (string row in rows)
+                {
+                    Customer customer = new Customer();
+                    customer.SetCustomerByString(row);
+                    list.Add(customer);
+                }
             }
         }
 
@@ -117,6 +148,50 @@ namespace Banken
             info1.Balance = int.Parse(Console.ReadLine());
             list.Add(info1);
         }
+
+        static void ShowBalance()
+        {
+            int n = 1;
+            foreach (Customer i in list)
+            {
+                Console.WriteLine(n + " Namn: " + i.Name);
+                n += 1;
+            }
+            Console.WriteLine("Vilken använder vill du see? ");
+            int show = int.Parse(Console.ReadLine());
+            Console.WriteLine(list[show].ShowCustomer);
+        }
+
+        static void AddBalance()
+        {
+            int n = 1;
+            foreach (Customer i in list)
+            {
+                Console.WriteLine(n + " Namn: " + i.Name);
+                n += 1;
+            }
+            Console.WriteLine("Vilken använder ska du sätta pengar i? ");
+            int customer = int.Parse(Console.ReadLine());
+            Console.WriteLine("Hur mycket ska du ge? ");
+            int money = int.Parse(Console.ReadLine());
+            list[customer].Balance += money;
+
+        }
+        static void RemoveBalance()
+        {
+            int n = 1;
+            foreach (Customer i in list)
+            {
+                Console.WriteLine(n + " Namn: " + i.Name);
+                n += 1;
+            }
+            Console.WriteLine("Vilken använder ska du ta pengar ifrån? ");
+            int customer = int.Parse(Console.ReadLine());
+            Console.WriteLine("Hur mycket ska du ta? ");
+            int money = int.Parse(Console.ReadLine());
+            list[customer].Balance -= money;
+        }
+
         static int SelectMenuItem()
         {
             Console.WriteLine("Välkommen till banken!");
@@ -132,8 +207,15 @@ namespace Banken
             Console.WriteLine("7 : Avsluta programmet");
 
             Console.WriteLine("Ange ditt val: ");
-            int choise = int.Parse(Console.ReadLine());
-
+            int choise = 0;
+            try
+            {
+                choise = int.Parse(Console.ReadLine());
+            }
+            catch
+            {
+                Console.WriteLine("Ett fel uppstod!");
+            }
             return choise;
         }
 
