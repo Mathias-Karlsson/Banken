@@ -42,7 +42,7 @@ namespace Banken
                 switch (choise)
                 {
                     case 1:
-                        Console.WriteLine("Du valde att lägga in en ny användare");
+                        Console.WriteLine("Du valde att lägga in en ny användare"); 
                         AddCustomer();
                         break;
                     case 2:
@@ -68,11 +68,11 @@ namespace Banken
                     case 7:
                         Console.WriteLine("Du valde att avsluta programmet");
 
-                        WriteFile(filepath, filename);
+                        WriteFile(filepath, filename); //WriteFile skriver ner alla ändringar i en filename och skickar det till filepath
 
                         break;
                     default:
-                        Console.WriteLine("Du gjorde ett felaktigt val");
+                        Console.WriteLine("Du gjorde ett felaktigt val"); //När man svarar med något annat som är inte 1 till 7
                         break;
                 }
             }
@@ -106,7 +106,7 @@ namespace Banken
 
         private static void ReadFile(string filepath, string filename)
         {
-            string f = filepath + filename;
+            string f = filepath + filename; //Objectet f letar efter filepath och filename för vars Customer kommer ligga i
             if (File.Exists(f))
             {
                 string[] rows = File.ReadAllLines(f);
@@ -123,7 +123,7 @@ namespace Banken
         {
             foreach (Customer i in list)
             {
-                Console.WriteLine("Namn: " + i.Name + " Balance: " + i.Balance);
+                Console.WriteLine("Namn: " + i.Name + " Balance: " + i.Balance); 
             }
         }
 
@@ -136,7 +136,7 @@ namespace Banken
                 n += 1;
             }
             Console.WriteLine("Vilken använder vill du ta bort? ");
-            int remove = int.Parse(Console.ReadLine());
+            int remove = int.Parse(Console.ReadLine()); //Objectet remove används för att ta bort en användare från list i Customer
             list.RemoveAt(remove - 1);
 
         }
@@ -158,7 +158,7 @@ namespace Banken
                 n += 1;
             }
             Console.WriteLine("Vilken använder vill du see? ");
-            int show = int.Parse(Console.ReadLine());
+            int show = int.Parse(Console.ReadLine()); //Objectet show frågar efter någon i klassen Customer
             Console.WriteLine(list[show].ShowCustomer);
         }
 
@@ -171,12 +171,13 @@ namespace Banken
                 n += 1;
             }
             Console.WriteLine("Vilken använder ska du sätta pengar i? ");
-            int customer = int.Parse(Console.ReadLine());
+            int customer = int.Parse(Console.ReadLine()); //Objectet customer vill veta vilken i klassen Customer ska få pengar
             Console.WriteLine("Hur mycket ska du ge? ");
-            int money = int.Parse(Console.ReadLine());
+            int money = int.Parse(Console.ReadLine()); //Objectet money frågar hur mycket pengar du ska ge till personen i klassen Customer
             list[customer].Balance += money;
 
         }
+
         static void RemoveBalance()
         {
             int n = 1;
@@ -186,9 +187,9 @@ namespace Banken
                 n += 1;
             }
             Console.WriteLine("Vilken använder ska du ta pengar ifrån? ");
-            int customer = int.Parse(Console.ReadLine());
+            int customer = int.Parse(Console.ReadLine()); //Objectet customer vill veta vilken i klassen Customer som ska förlora pengar
             Console.WriteLine("Hur mycket ska du ta? ");
-            int money = int.Parse(Console.ReadLine());
+            int money = int.Parse(Console.ReadLine()); //Objectet money frågar hur mycket du ska ta ifrån personen i klassen Customer
             list[customer].Balance -= money;
         }
 
